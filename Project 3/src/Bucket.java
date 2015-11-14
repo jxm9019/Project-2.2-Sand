@@ -8,31 +8,24 @@
  * that holds sand, transfers to other Bucket objects, and throws out its sand.
  */
 public class Bucket {
-    public static final int MINSAND = 0;      //Minimum amount of sand
-    private int maxSand;                      //Maximum amount of sand able to store in bucket
-    private int curSand;                      //Current amount of sand in bucket
+    public static final int MINSAND = 0;
+    private int maxSand;
+    private int curSand;
 
-    
-    /* Constructor takes in the maximum amount of sand bucket can take
-     * @param int: amount of sand bucket can take
-     */
     public Bucket(int maxSand){
         this.maxSand = maxSand;
         this.curSand = 0;
     }
 
-    //Copy constructor of bucket
     public Bucket(Bucket bucket){
         this.maxSand = bucket.maxSand;
         this.curSand = bucket.curSand;
     }
 
-    //Getter of current sand
     public int getCurSand() {
         return curSand;
     }
 
-    //Getter of maxSand
     public int getMaxSand() {
         return maxSand;
     }
@@ -49,11 +42,8 @@ public class Bucket {
         return (curSand == maxSand);
     }
 
-    /* Checks if bucket is empty
-     * @return boolean : true if bucket is empty, false otherwise
-     */
-    public boolean isEmpty(){
-        return(curSand == 0);
+    public boolean isEmpty(Bucket bucket){
+        return(bucket.curSand == 0);
     }
 
     /* Empties out a bucket of its sand
@@ -69,7 +59,38 @@ public class Bucket {
         setCurSand(maxSand);
     }
 
+    public boolean transfer(Bucket bucket2){
+        if(!bucket2.isFull()){
+            bucket2.setCurSand(getCurSand()+bucket2.getCurSand());
+            if(bucket2.getCurSand()>bucket2.getMaxSand()){
+                int temp = (bucket2.getCurSand()-bucket2.getMaxSand());
+                bucket2.setCurSand(bucket2.getMaxSand());
+                setCurSand(temp);
+                return true;
+            }else
+            if(bucket2.getCurSand()<=bucket2.getMaxSand()){
+                emptyBucket();
+                return true;
+            }else
+                return false;
+        }else
+            return false;
+    }
 
+    public static void main(String[] args) {
+        Bucket b1 = new Bucket(5);
+        Bucket b2 = new Bucket(2);
+
+        System.out.println(b1.getMaxSand()+ " b1 max");
+        System.out.println(b2.getMaxSand()+ " b2 max");
+        b1.fill();
+        System.out.println(b1.getCurSand() + " b1 cur after fill");
+        b1.emptyBucket();
+        System.out.println(b1.getCurSand() + " b1 cur after empty");
+
+
+
+    }
 
 
 }
