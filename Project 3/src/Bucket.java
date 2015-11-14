@@ -54,13 +54,13 @@ public class Bucket {
     }
 
     public boolean isEmpty(Bucket bucket){
-        return(bucket.curSand == 0);
+        return(bucket.curSand == MINSAND);
     }
 
     /* Empties out a bucket of its sand
      */
     public void emptyBucket(){
-        curSand = 0;
+        curSand = MINSAND;
         System.out.println("Bucket is now empty.");
     }
 
@@ -99,6 +99,4 @@ public class Bucket {
         }
         System.out.println(goal+ " goal");
     }
-
-
 }
