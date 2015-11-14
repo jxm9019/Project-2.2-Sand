@@ -88,6 +88,7 @@ public class Bucket {
             return false;
     }
 
+
     public static void main(String[] args) {
         goal = Integer.parseInt(args[0]);
         ArrayList<Bucket> bucketList= new ArrayList<>();
