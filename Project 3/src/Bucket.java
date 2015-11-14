@@ -16,6 +16,9 @@ public class Bucket {
         this.maxSand = maxSand;
         this.curSand = 0;
     }
+    public Bucket(int numOfBuckets){
+        
+    }
 
     public Bucket(Bucket bucket){
         this.maxSand = bucket.maxSand;
@@ -58,39 +61,4 @@ public class Bucket {
     public void fill(){
         setCurSand(maxSand);
     }
-
-    public boolean transfer(Bucket bucket2){
-        if(!bucket2.isFull()){
-            bucket2.setCurSand(getCurSand()+bucket2.getCurSand());
-            if(bucket2.getCurSand()>bucket2.getMaxSand()){
-                int temp = (bucket2.getCurSand()-bucket2.getMaxSand());
-                bucket2.setCurSand(bucket2.getMaxSand());
-                setCurSand(temp);
-                return true;
-            }else
-            if(bucket2.getCurSand()<=bucket2.getMaxSand()){
-                emptyBucket();
-                return true;
-            }else
-                return false;
-        }else
-            return false;
-    }
-
-    public static void main(String[] args) {
-        Bucket b1 = new Bucket(5);
-        Bucket b2 = new Bucket(2);
-
-        System.out.println(b1.getMaxSand()+ " b1 max");
-        System.out.println(b2.getMaxSand()+ " b2 max");
-        b1.fill();
-        System.out.println(b1.getCurSand() + " b1 cur after fill");
-        b1.emptyBucket();
-        System.out.println(b1.getCurSand() + " b1 cur after empty");
-
-
-
-    }
-
-
 }
