@@ -17,7 +17,8 @@ import java.util.ArrayList;
  */
 
 /**
- * @author Jean Luis Urena 
+ * @author Jean Luis Urena ju7847
+ * @author Jake Madlem     jxm9019
  * ID: ju7847
  * CS For Transfers
  * Project2
