@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * @author Jean Luis Urena ju7847 
  * @author Jake Madlem     jxm9019
@@ -11,6 +13,7 @@ public class Bucket {
     public static final int MINSAND = 0;
     private int maxSand;
     private int curSand;
+    private static int goal;
 
     public Bucket(int maxSand){
         this.maxSand = maxSand;
@@ -20,6 +23,14 @@ public class Bucket {
     public Bucket(Bucket bucket){
         this.maxSand = bucket.maxSand;
         this.curSand = bucket.curSand;
+    }
+
+    public static int getGoal() {
+        return goal;
+    }
+
+    public boolean isGoal(){
+        return(curSand==goal);
     }
 
     public int getCurSand() {
@@ -78,18 +89,15 @@ public class Bucket {
     }
 
     public static void main(String[] args) {
-        Bucket b1 = new Bucket(5);
-        Bucket b2 = new Bucket(2);
-
-        System.out.println(b1.getMaxSand()+ " b1 max");
-        System.out.println(b2.getMaxSand()+ " b2 max");
-        b1.fill();
-        System.out.println(b1.getCurSand() + " b1 cur after fill");
-        b1.emptyBucket();
-        System.out.println(b1.getCurSand() + " b1 cur after empty");
-
-
-
+        goal = Integer.parseInt(args[0]);
+        ArrayList<Bucket> bucketList= new ArrayList<>();
+        for(int i=1;i<args.length;i++){
+            bucketList.add(new Bucket(Integer.parseInt(args[i])));
+        }
+        for (int i =0; i < bucketList.size(); i++) {
+            System.out.println("Bucket "+(i+1)+": "+ bucketList.get(i).getMaxSand() +"max sand");
+        }
+        System.out.println(goal+ " goal");
     }
 
 
