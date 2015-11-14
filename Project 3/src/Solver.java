@@ -30,7 +30,7 @@ public class Solver {
 
     
     
-    public ArrayList<Integer> solver(Mobius mobius){
+    public ArrayList<Integer> solver(Puzzle puzzle){
         //Array list of array list of integers
         ArrayList<ArrayList<Integer>> queue = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> startConfig = new ArrayList<Integer>(1);
@@ -39,14 +39,14 @@ public class Solver {
         ArrayList<Integer> current = new ArrayList<Integer>();
         
         //Adding starting number to start config
-        startConfig.add(mobius.getStart());
+        startConfig.add(puzzle.getStart());
         
         //Enqueue'ing startConfig
         queue.add(startConfig);
         
         //checking if starting config is the ending config
         boolean found;
-        if (mobius.getStart() == mobius.getGoal()){
+        if (puzzle.getStart() == puzzle.getGoal()){
             current = queue.remove(0);
             found = true;
         } else {
@@ -60,12 +60,12 @@ public class Solver {
             current = queue.remove(0);
             
             //for each neighbor of the last element in current
-            for (int iterator: mobius.getNeighbors(current.get(current.size()-1))){
+            for (int iterator: puzzle.getNeighbors(current.get(current.size()-1))){
                 //next config a copy of current
                 ArrayList<Integer> nextConfig = new ArrayList<Integer>(current);
                 //appending neighbors to nextConfig
                 nextConfig.add(iterator);
-                if(iterator == mobius.getGoal()){
+                if(iterator == puzzle.getGoal()){
                     current = nextConfig;
                     found = true;
                     break;

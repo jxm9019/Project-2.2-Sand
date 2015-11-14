@@ -109,6 +109,11 @@ public class Mobius implements Puzzle {
     
     //Main method to test program
     public static void main (String [] args){
+        if(args.length != 3){
+            System.out.println("Usage: java Mobius range start goal ");
+            return;
+        }
+        
         //List to hold path
         ArrayList<Integer> path;
         
