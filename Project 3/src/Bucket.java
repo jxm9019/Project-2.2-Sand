@@ -13,30 +13,25 @@ public class Bucket {
     public static final int MINSAND = 0;
     private int maxSand;
     private int curSand;
-    private static int goal;
 
+    //Constructor will take the max amount of sand it can take and build a bucket
     public Bucket(int maxSand){
         this.maxSand = maxSand;
         this.curSand = 0;
     }
 
+    //Bucket copy constructor
     public Bucket(Bucket bucket){
         this.maxSand = bucket.maxSand;
         this.curSand = bucket.curSand;
     }
 
-    public static int getGoal() {
-        return goal;
-    }
-
-    public boolean isGoal(){
-        return(curSand==goal);
-    }
-
+    //Getter of current sand
     public int getCurSand() {
         return curSand;
     }
 
+    //Getter of max sand bucket can hold
     public int getMaxSand() {
         return maxSand;
     }
@@ -53,8 +48,11 @@ public class Bucket {
         return (curSand == maxSand);
     }
 
-    public boolean isEmpty(Bucket bucket){
-        return(bucket.curSand == MINSAND);
+    /* Checks if bucket is empty
+     * @return boolean: true if bucket is empty, false otherwise.
+     */
+    public boolean isEmpty(){
+        return(curSand == MINSAND);
     }
 
     /* Empties out a bucket of its sand
@@ -70,34 +68,33 @@ public class Bucket {
         setCurSand(maxSand);
     }
 
+    
+    /* This will transfer sand from one bucket to another.
+     * 
+     * @param Bucket: bucket that sand will be transferred to
+     * @return : true if bucket transfer is successful, false otherwise
+     */
     public boolean transfer(Bucket bucket2){
+        //Checking if bucket is not full
         if(!bucket2.isFull()){
+            
+            //Setting current sand of second bucket to sum of the two buckets
             bucket2.setCurSand(getCurSand()+bucket2.getCurSand());
+            
+            //If bucket overflows...
             if(bucket2.getCurSand()>bucket2.getMaxSand()){
-                int temp = (bucket2.getCurSand()-bucket2.getMaxSand());
-                bucket2.setCurSand(bucket2.getMaxSand());
-                setCurSand(temp);
+                int temp = (bucket2.getCurSand()-bucket2.getMaxSand());  //temp amount of sand difference between buckets
+                bucket2.setCurSand(bucket2.getMaxSand());                //Setting second bucket to max
+                setCurSand(temp);                                        //setting first bucket to difference
                 return true;
-            }else
-            if(bucket2.getCurSand()<=bucket2.getMaxSand()){
+            
+             //If bucket does not overflow
+            } else if(bucket2.getCurSand()<=bucket2.getMaxSand()){
                 emptyBucket();
                 return true;
-            }else
+            } else
                 return false;
-        }else
+        } else
             return false;
-    }
-
-
-    public static void main(String[] args) {
-        goal = Integer.parseInt(args[0]);
-        ArrayList<Bucket> bucketList= new ArrayList<>();
-        for(int i=1;i<args.length;i++){
-            bucketList.add(new Bucket(Integer.parseInt(args[i])));
-        }
-        for (int i =0; i < bucketList.size(); i++) {
-            System.out.println("Bucket "+(i+1)+": "+ bucketList.get(i).getMaxSand() +"max sand");
-        }
-        System.out.println(goal+ " goal");
     }
 }
