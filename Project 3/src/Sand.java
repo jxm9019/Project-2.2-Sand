@@ -9,18 +9,18 @@ import java.util.ArrayList;
  * This is a Bucket class. This class is to be used with Sand puzzle, Bucket is an object 
  * that holds sand, transfers to other Bucket objects, and throws out its sand.
  */
-public class Bucket {
+public class Sand {
     public static final int MINSAND = 0;
     private int maxSand;
     private int curSand;
     private static int goal;
 
-    public Bucket(int maxSand){
+    public Sand(int maxSand){
         this.maxSand = maxSand;
         this.curSand = 0;
     }
 
-    public Bucket(Bucket bucket){
+    public Sand(Sand bucket){
         this.maxSand = bucket.maxSand;
         this.curSand = bucket.curSand;
     }
@@ -53,7 +53,7 @@ public class Bucket {
         return (curSand == maxSand);
     }
 
-    public boolean isEmpty(Bucket bucket){
+    public boolean isEmpty(Sand bucket){
         return(bucket.curSand == MINSAND);
     }
 
@@ -70,7 +70,7 @@ public class Bucket {
         setCurSand(maxSand);
     }
 
-    public boolean transfer(Bucket bucket2){
+    public boolean transfer(Sand bucket2){
         if(!bucket2.isFull()){
             bucket2.setCurSand(getCurSand()+bucket2.getCurSand());
             if(bucket2.getCurSand()>bucket2.getMaxSand()){
@@ -91,12 +91,12 @@ public class Bucket {
 
     public static void main(String[] args) {
         goal = Integer.parseInt(args[0]);
-        ArrayList<Bucket> bucketList= new ArrayList<>();
+        ArrayList<Sand> bucketList= new ArrayList<>();
         for(int i=1;i<args.length;i++){
-            bucketList.add(new Bucket(Integer.parseInt(args[i])));
+            bucketList.add(new Sand(Integer.parseInt(args[i])));
         }
         for (int i =0; i < bucketList.size(); i++) {
-            System.out.println("Bucket "+(i+1)+": "+ bucketList.get(i).getMaxSand() +"max sand");
+            System.out.println("Bucket "+(i+1)+": "+ bucketList.get(i).getMaxSand() +" max sand");
         }
         System.out.println(goal+ " goal");
     }
