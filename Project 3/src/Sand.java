@@ -41,7 +41,7 @@ public class Sand {
         return maxSand;
     }
 
-    //Sets current amount of sand 
+    //Sets current amount of sand
     public void setCurSand(int curSand) {
         this.curSand = curSand;
     }
