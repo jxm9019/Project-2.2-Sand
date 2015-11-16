@@ -14,16 +14,14 @@ public class Sand {
     private int maxSand;
     private int curSand;
 
-    public Sand(int maxSand){
     //Constructor will take the max amount of sand it can take and build a bucket
-    public Bucket(int maxSand){
+    public Sand(int maxSand){
         this.maxSand = maxSand;
         this.curSand = 0;
     }
 
-    public Sand(Sand bucket){
     //Bucket copy constructor
-    public Bucket(Bucket bucket){
+    public Sand(Sand bucket){
         this.maxSand = bucket.maxSand;
         this.curSand = bucket.curSand;
     }
@@ -73,9 +71,9 @@ public class Sand {
      * @param Bucket: bucket that sand will be transferred to
      * @return : true if bucket transfer is successful, false otherwise
      */
-    public boolean transfer(Bucket bucket2){
-        //Checking if bucket is not full
+
     public boolean transfer(Sand bucket2){
+        //Checking if bucket is not full
         if(!bucket2.isFull()){
             
             //Setting current sand of second bucket to sum of the two buckets
@@ -100,7 +98,6 @@ public class Sand {
 
 
     public static void main(String[] args) {
-        goal = Integer.parseInt(args[0]);
         ArrayList<Sand> bucketList= new ArrayList<>();
         for(int i=1;i<args.length;i++){
             bucketList.add(new Sand(Integer.parseInt(args[i])));
@@ -108,6 +105,5 @@ public class Sand {
         for (int i =0; i < bucketList.size(); i++) {
             System.out.println("Bucket "+(i+1)+": "+ bucketList.get(i).getMaxSand() +" max sand");
         }
-        System.out.println(goal+ " goal");
     }
 }
