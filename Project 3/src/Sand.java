@@ -48,8 +48,8 @@ public class Sand {
         return (curSand == maxSand);
     }
 
-    public boolean isEmpty(Sand bucket){
-        return(bucket.curSand == MINSAND);
+    public boolean isEmpty(){
+        return(curSand == MINSAND);
     }
 
     /* Empties out a bucket of its sand
