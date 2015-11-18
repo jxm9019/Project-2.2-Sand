@@ -8,13 +8,13 @@ import java.util.ArrayList;
  * An interface puzzle class that contains stubs for a puzzle.
  */
 
-public interface Puzzle <E extends Comparable<? super E>> {
+public interface Puzzle {
 
     //Getter for a goal in the puzzle
     public int getGoal();
     
     //Will return neighbors of a given number
-    public ArrayList<E> getNeighbors(int config);
+    public ArrayList<Integer> getNeighbors(int config);
     
     //Getter for start of puzzle
     public int getStart();

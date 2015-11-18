@@ -9,20 +9,22 @@ import java.util.ArrayList;
  * This solver class contains method to solve Mobius puzzle.
  */
 
-public class Solver {
+public class Solver <E extends Comparable<? super E>> {
 
     
-    
-    public ArrayList<Integer> solver(Puzzle puzzle){
+/****************************************************************    
+	//Have to use something other than an array list!!!!!!
+	 **********************************************************/
+    public ArrayList<E> solver (Puzzle puzzle){
         //Array list of array list of integers
-        ArrayList<ArrayList<Integer>> queue = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<E>> queue = new ArrayList<ArrayList<E>>();
         ArrayList<Integer> startConfig = new ArrayList<Integer>(1);
         
         //ArrayList to hold current path
-        ArrayList<Integer> current = new ArrayList<Integer>();
+        ArrayList<E> current = new ArrayList<E>();
         
         //Adding starting number to start config
-        startConfig.add(puzzle.getStart());
+        startConfig.add((puzzle.getStart()));
         
         //Enqueue'ing startConfig
         queue.add(startConfig);
