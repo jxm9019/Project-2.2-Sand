@@ -11,24 +11,24 @@ import java.util.ArrayList;
 
 public class Solver <E>  {
 
-    
-/****************************************************************    
-	//Have to use something other than an array list!!!!!!
-	 **********************************************************/
+
+    /****************************************************************
+     //Have to use something other than an array list!!!!!!
+     **********************************************************/
     public ArrayList<E> solver (Puzzle<E> puzzle){
         //Array list of array list of integers
         ArrayList<ArrayList<E>> queue = new ArrayList<>();
         ArrayList<E> startConfig = new ArrayList<>();
-        
+
         //ArrayList to hold current path
         ArrayList<E> current = new ArrayList<E>();
-        
+
         //Adding starting number to start config
         startConfig.add((puzzle.getStart()));
-        
+
         //Enqueue'ing startConfig
         queue.add(startConfig);
-        
+
         //checking if starting config is the ending config
         boolean found;
         if (puzzle.getStart() == puzzle.getGoal()){
@@ -37,13 +37,11 @@ public class Solver <E>  {
         } else {
             found = false;
         }
-        
-        
         while(!queue.isEmpty() && !found){
             //dequeue'ing the front element from the queue and setting to current
 
             current = queue.remove(0);
-            
+
             //for each neighbor of the last element in current
             for (E iterator: puzzle.getNeighbors(current.get(current.size()-1))){
                 //next config a copy of current
@@ -57,16 +55,13 @@ public class Solver <E>  {
                 } else {
                     queue.add(nextConfig);
                 }
-                
-                
-                
             }
         }
-        
+
         //Return array list of path if found
         if(found)
             return current;
-        //Return null and print out display saying there is no solution
+            //Return null and print out display saying there is no solution
         else {
             System.out.println("There is no solution");
             return null;
