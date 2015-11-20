@@ -64,19 +64,19 @@ public class Mobius <E> implements Puzzle {
          * else, substract 1 for left, add 1 for right
          */
         if ((int)config   == 1){
-            leftNeighbor  = (int)range;
+//            leftNeighbor  = (int)range;
             rightNeighbor = 2;
         //If
         } else if (config == range){
             rightNeighbor = 1;
-            leftNeighbor  = (int) range - 1;
+//            leftNeighbor  = (int)(range - 1);
         } else {
             leftNeighbor  = (int) config - 1;
             rightNeighbor = (int) config + 1;
         }
         
         //Adding neighbors to array list, and returning array list
-        neighbors.add((int)leftNeighbor);
+//        neighbors.add((int)leftNeighbor);
         neighbors.add((int)rightNeighbor);
         return neighbors;
         
