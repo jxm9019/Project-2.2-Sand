@@ -82,10 +82,11 @@ public class Sand <E> implements Puzzle {
     public E getGoal() {
         return goal;
     }
-
-
-
-
+    //Getter of start
+    @Override
+    public Object getStart() {
+        return bucketList[0];
+    }
     /**This program will return neighbors of a specific configuration
      * It will create all possible solutions and store them in an array.
      *
@@ -94,16 +95,16 @@ public class Sand <E> implements Puzzle {
      */
     @Override
     public ArrayList<Sand> getNeighbors(Object input) {
+
         Sand config = (Sand)input;
-        
         ArrayList<Sand> successors = new ArrayList<>();
         for (int k = 0; k < amountOfBuckets; k++) {
         	
             //if bucket[k] is empty then make a copy and fill it
             if(config.bucketList[k].isEmpty()){
-            	System.out.println("I filled a bucket");
                 Sand copy = new Sand(config);
                 copy.getBucket(k).fill();
+                System.out.println("I filled a bucket");
                 successors.add(copy);
                 
             }
@@ -129,14 +130,9 @@ public class Sand <E> implements Puzzle {
         return successors;
 //return null;
     }
-    //Getter of start
-    @Override
-    public Object getStart() {
-        return start;
-    }
     
-    
-    /** 
+
+    /**
      * This method will solve and give a solution for the puzzle. NOT IN THE LEAST STEPS.
      * It will use a method of Fill -> Transfer right until no longer possible -> dump last bucket on right.
      * (Repeat)
@@ -146,21 +142,22 @@ public class Sand <E> implements Puzzle {
      */
     
     public static void main (String [] args){
+        if(args.length<3) {
+            System.out.println("Usage: java Sand amount bucket1 bucket2 ... ");
+            System.exit(0);
+        }
     	Sand sand = new Sand (args);
     	Sand sandCopy = new Sand(sand);
     	
     	ArrayList<Sand> sandNeighbor = new ArrayList<> (sand.getNeighbors(sand));
-    	
 
-    	for (int i = 0; i < sandNeighbor.size(); i++){
-    		for(Sand h: sandNeighbor)
-    		System.out.println(h.getBucket(i).getCurSand());
-    	}
-        
-        
-    	
-    	
+        Solver solve = new Solver();
+        solve.solver(sand);
+
+
+//    	for (int i = 0; i < sandNeighbor.size(); i++){
+//    		for(Sand h: sandNeighbor)
+//    		System.out.println(h.getBucket(i).getCurSand());
+//    	}
     }
-    
-    
 }

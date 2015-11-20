@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashSet;
+
 /**
  * @author Jean Luis Urena ju7847
  * @author Jake Madlem     jxm9019
@@ -17,43 +19,43 @@ public class Solver <E>  {
      **********************************************************/
     public ArrayList<E> solver (Puzzle<E> puzzle){
         //Array list of array list of integers
+        HashSet<E> visitSet = new HashSet<>();
         ArrayList<ArrayList<E>> queue = new ArrayList<>();
         ArrayList<E> startConfig = new ArrayList<>();
-
         //ArrayList to hold current path
-        ArrayList<E> current = new ArrayList<E>();
-
+        ArrayList<E> current = new ArrayList<>();
         //Adding starting number to start config
         startConfig.add((puzzle.getStart()));
-
         //Enqueue'ing startConfig
         queue.add(startConfig);
-
+        //Adds first config to visited list
+        visitSet.add(puzzle.getStart());
         //checking if starting config is the ending config
         boolean found;
         if (puzzle.getStart() == puzzle.getGoal()){
             current = queue.remove(0);
             found = true;
-        } else {
+        }else
             found = false;
-        }
         while(!queue.isEmpty() && !found){
             //dequeue'ing the front element from the queue and setting to current
-
             current = queue.remove(0);
-
             //for each neighbor of the last element in current
             for (E iterator: puzzle.getNeighbors(current.get(current.size()-1))){
-                //next config a copy of current
-                ArrayList<E> nextConfig = new ArrayList<E>(current);
-                //appending neighbors to nextConfig
-                nextConfig.add(iterator);
-                if(iterator == puzzle.getGoal()){
-                    current = nextConfig;
-                    found = true;
-                    break;
-                } else {
-                    queue.add(nextConfig);
+                //if the config hasn't been visited yet
+                if(!visitSet.contains(iterator)) {
+                    //next config a copy of current
+                    ArrayList<E> nextConfig = new ArrayList<>(current);
+                    //appending neighbors to nextConfig
+                    nextConfig.add(iterator);
+                    if (iterator == puzzle.getGoal()) {
+                        current = nextConfig;
+                        found = true;
+                        break;
+                    } else {
+                        queue.add(nextConfig);
+                    }
+                    visitSet.add(iterator);
                 }
             }
         }
