@@ -44,6 +44,7 @@ public class Sand <E> implements Puzzle {
 
     public Sand (Sand sand){
         this.bucketList = new Sand(sand.bucketList);
+        aefgayef
 
     }
 
