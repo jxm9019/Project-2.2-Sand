@@ -45,7 +45,7 @@ public class Mobius <E> implements Puzzle {
     
     /**
      *  Finds neighbors of given config
-        @param int: number you want to find neighbors of
+//        @param int: number you want to find neighbors of
         @return ArrayList<Integer>: a list of neighbors
       */
     @Override
