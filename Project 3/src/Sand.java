@@ -1,5 +1,3 @@
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.util.ArrayList;
 
 
@@ -21,11 +19,12 @@ import java.util.ArrayList;
  *
  */
 
-public class Sand<E> implements Puzzle {
-
+@SuppressWarnings({ "unchecked", "rawtypes" })
+public class Sand <E> implements Puzzle {
+    
     private Bucket bucketList [];       //Array to hold list of buckets from command line
-    private E goal;                   //Goal
-    private final int start = 0;        //Start, always 0
+    private E goal;                     //Goal 
+    private int start = 0;              //Start, always 0
     private int amountOfBuckets;        //Amount of buckets
 
     /**
@@ -33,13 +32,14 @@ public class Sand<E> implements Puzzle {
      * Also creates array of Buckets based on amount of buckets passed.
      * @param args
      */
-    public Sand (String[] args) {
-        this.amountOfBuckets = args.length-1;
-        bucketList = new Bucket[amountOfBuckets];
-        goal = (E)(args[0]);
-        for (int i = 1; i <=amountOfBuckets ; i++) {
-            bucketList[i] = new Bucket(Integer.parseInt(args[i]));
-        }
+	public Sand (String [] args) {
+    	this.amountOfBuckets = args.length;
+    	bucketList = new Bucket[amountOfBuckets];
+    	goal = (E) args[0];
+    	for(int i = 1; i < args.length; i++){
+    		bucketList[i] = new Bucket (Integer.parseInt(args[i]));
+    	}
+        
     }
 
     public Sand (Sand sand){
@@ -49,19 +49,21 @@ public class Sand<E> implements Puzzle {
 
     //Getter of amount of buckets
     public int getAmountOfBuckets(){
-        return amountOfBuckets;
+    	return amountOfBuckets;
     }
-
+    
     //Getter of bucket list
     public Bucket getBucket(int index){
-        return bucketList[index];
+    	return bucketList[index];
     }
-
+    
     //Getter of goal
     @Override
     public E getGoal() {
         return goal;
     }
+    
+
 
 
     /** This program will return neighbors of a specific configuration
@@ -85,12 +87,12 @@ public class Sand<E> implements Puzzle {
     }
     //Getter of start
     @Override
-    public E getStart() {
-        return (E)start;
+    public Object getStart() {
+        return start;
     }
-
-
-    /**
+    
+    
+    /** 
      * This method will solve and give a solution for the puzzle. NOT IN THE LEAST STEPS.
      * It will use a method of Fill -> Transfer right until no longer possible -> dump last bucket on right.
      * (Repeat)
@@ -98,17 +100,16 @@ public class Sand<E> implements Puzzle {
      * @param Bucket []: Bucket list that contains all bucket objects.
      * @return ArrayList<Bucket> : list of all possible solutions using Fill -> transfer -> dump method
      */
-    public ArrayList<Bucket> solution(Bucket [] bucketList){
-        return null;
+    
+    public static void main (String [] args){
+    	Sand sand = new Sand(args);
+    	for(int i = 1; i < args.length; i++){
+    		System.out.println(sand.getBucket(i).getMaxSand());
+    		System.out.println(sand.getBucket(i).getCurSand());
+    	}
+    	
     }
 
-    public static void main(String[] args) {
-        Sand sand = new Sand(args);
-
-        for (int i = 1; i <args.length ; i++) {
-            System.out.println(sand.getBucket(i).getMaxSand());
-        }
-    }
-
-
+    
+    
 }
