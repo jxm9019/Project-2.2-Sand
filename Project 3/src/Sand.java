@@ -19,11 +19,12 @@ import java.util.ArrayList;
  *
  */
 
-public class Sand implements Puzzle {
+@SuppressWarnings({ "unchecked", "rawtypes" })
+public class Sand <E> implements Puzzle {
     
     private Bucket bucketList [];       //Array to hold list of buckets from command line
-    private int goal;                   //Goal 
-    private final int start = 0;        //Start, always 0
+    private E goal;                     //Goal 
+    private int start = 0;              //Start, always 0
     private int amountOfBuckets;        //Amount of buckets
     
     
@@ -33,10 +34,13 @@ public class Sand implements Puzzle {
      * @param goal
      * @param amountOfBuckets
      */
-    public Sand (int goal, int amountOfBuckets) {
-    	this.amountOfBuckets = amountOfBuckets;
-    	this.goal = goal;
+	public Sand (String [] args) {
+    	this.amountOfBuckets = args.length;
     	bucketList = new Bucket[amountOfBuckets];
+    	goal = (E) args[0];
+    	for(int i = 1; i < args.length; i++){
+    		bucketList[i] = new Bucket (Integer.parseInt(args[i]));
+    	}
         
     }
     
@@ -46,15 +50,17 @@ public class Sand implements Puzzle {
     }
     
     //Getter of bucket list
-    public Bucket [] getBucketList(){
-    	return bucketList;
+    public Bucket getBucket(int index){
+    	return bucketList[index];
     }
     
     //Getter of goal
     @Override
-    public int getGoal() {
+    public E getGoal() {
         return goal;
     }
+    
+
 
 
     /** This program will return neighbors of a specific configuration
@@ -63,33 +69,15 @@ public class Sand implements Puzzle {
      * @return ArrayList<Integer>: list of neighbors
      */
     @Override
-    public ArrayList<Integer> getNeighbors( int config ) {
-    	ArrayList<Integer> neighbors = new ArrayList<Integer>();   //List of neighbors
-        int leftNeighbor = config -1;                              // Left neighbor will be on left
-        int rightNeighbor = config +1;                             //Right neighbor will be on right
-        
-        //If there is no left neighbor
-        if(config == 1){
-        	neighbors.add(bucketList[rightNeighbor].getMaxSand());
-        	
-        //Else if there is no right neighbor
-        } else if (bucketList[rightNeighbor] == null){
-        	neighbors.add(bucketList[leftNeighbor].getMaxSand());
-        	
-        //else if there are neighbors on both sides
-        } else {
-        	neighbors.add(bucketList[leftNeighbor].getMaxSand());
-        	neighbors.add(bucketList[rightNeighbor].getMaxSand());
-        	
-        }
-        return neighbors;
+    public ArrayList<Bucket> getNeighbors( Object config ) {
+    	return null;
         
     }
 
 
     //Getter of start
     @Override
-    public int getStart() {
+    public Object getStart() {
         return start;
     }
     
@@ -104,6 +92,15 @@ public class Sand implements Puzzle {
      */
     public ArrayList<Bucket> solution(Bucket [] bucketList){
     	return null;
+    }
+    
+    public static void main (String [] args){
+    	Sand sand = new Sand(args);
+    	for(int i = 1; i < args.length; i++){
+    		System.out.println(sand.getBucket(i).getMaxSand());
+    		System.out.println(sand.getBucket(i).getCurSand());
+    	}
+    	
     }
 
     

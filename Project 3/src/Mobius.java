@@ -8,7 +8,8 @@ import java.util.ArrayList;
  * This is the Mobius class. Implements Puzzle to solve a Mobius puzzle.
  */
 
-public class Mobius <E> implements Puzzle {
+@SuppressWarnings("rawtypes")
+public class Mobius <E> implements Puzzle  {
 
     //Fields for range, start and goal of puzzle
     private E range;
@@ -111,10 +112,10 @@ public class Mobius <E> implements Puzzle {
         }
         
         //Mobius object to solve puzzle
-        Mobius mob = new Mobius (range, start, goal);
+        Mobius<Integer> mob = new Mobius<Integer> (range, start, goal);
         
         //Solving puzzle
-        Solver solver = new Solver();
+        Solver<Integer> solver = new Solver<Integer>();
         path = solver.solver(mob);
         
         //Printing values
