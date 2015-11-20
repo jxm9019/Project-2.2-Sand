@@ -8,35 +8,35 @@ import java.util.ArrayList;
  * This is the Mobius class. Implements Puzzle to solve a Mobius puzzle.
  */
 
-public class Mobius implements Puzzle {
+public class Mobius <E> implements Puzzle {
 
     //Fields for range, start and goal of puzzle
-    private static int rangeM;
-    private static int startM;
-    private static int goalM;
+    private E range;
+    private E start;
+    private E goal;
     
     //Constructor takes in a range, start and goal.
-    public Mobius(int range, int start, int goal){
-        rangeM = range;
-        startM = start;
-        goalM = goal;
+    public Mobius(E range, E start, E goal){
+        this.range = range;
+        this.start = start;
+        this.goal = goal;
     }
     
     //Getter of goal
     @Override
-    public int getGoal() {
-        return goalM;
+    public E getGoal() {
+        return goal;
     }
     
     //Getter of start
     @Override
-    public int getStart(){
-        return startM;
+    public E getStart(){
+        return start;
     }
     
     //Getter of range
-    public int getRange(){
-        return rangeM;
+    public E getRange(){
+        return range;
     }
 
     
@@ -49,7 +49,7 @@ public class Mobius implements Puzzle {
         @return ArrayList<Integer>: a list of neighbors
       */
     @Override
-    public ArrayList<Integer> getNeighbors( int config ) {
+    public ArrayList<Integer> getNeighbors(Object config) {
         //List to hold neighbors
         ArrayList<Integer> neighbors = new ArrayList<Integer>();
         
@@ -62,21 +62,21 @@ public class Mobius implements Puzzle {
          * If config is size range, right neighbor should be 1, left should be range -1
          * else, substract 1 for left, add 1 for right
          */
-        if (config == 1){
-            leftNeighbor = rangeM;
+        if ((int)config   == 1){
+            leftNeighbor  = (int)range;
             rightNeighbor = 2;
         //If
-        } else if (config == rangeM){
+        } else if (config == range){
             rightNeighbor = 1;
-            leftNeighbor = rangeM - 1;
+            leftNeighbor  = (int) range - 1;
         } else {
-            leftNeighbor = config - 1;
-            rightNeighbor = config + 1;
+            leftNeighbor  = (int) config - 1;
+            rightNeighbor = (int) config + 1;
         }
         
         //Adding neighbors to array list, and returning array list
-        neighbors.add(leftNeighbor);
-        neighbors.add(rightNeighbor);
+        neighbors.add((int)leftNeighbor);
+        neighbors.add((int)rightNeighbor);
         return neighbors;
         
     }
@@ -85,7 +85,7 @@ public class Mobius implements Puzzle {
         @return String: object string values
       */
     public String toString(){
-        return rangeM + " " + startM + " " + goalM;
+        return range + " " + start + " " + goal;
         
     }
     

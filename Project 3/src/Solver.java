@@ -9,16 +9,16 @@ import java.util.ArrayList;
  * This solver class contains method to solve Mobius puzzle.
  */
 
-public class Solver <E extends Comparable<? super E>> {
+public class Solver <E>  {
 
     
 /****************************************************************    
 	//Have to use something other than an array list!!!!!!
 	 **********************************************************/
-    public ArrayList<E> solver (Puzzle puzzle){
+    public ArrayList<E> solver (Puzzle<E> puzzle){
         //Array list of array list of integers
-        ArrayList<ArrayList<E>> queue = new ArrayList<ArrayList<E>>();
-        ArrayList<Integer> startConfig = new ArrayList<Integer>(1);
+        ArrayList<ArrayList<E>> queue = new ArrayList<>();
+        ArrayList<E> startConfig = new ArrayList<>();
         
         //ArrayList to hold current path
         ArrayList<E> current = new ArrayList<E>();
@@ -45,9 +45,9 @@ public class Solver <E extends Comparable<? super E>> {
             current = queue.remove(0);
             
             //for each neighbor of the last element in current
-            for (int iterator: puzzle.getNeighbors(current.get(current.size()-1))){
+            for (E iterator: puzzle.getNeighbors(current.get(current.size()-1))){
                 //next config a copy of current
-                ArrayList<Integer> nextConfig = new ArrayList<Integer>(current);
+                ArrayList<E> nextConfig = new ArrayList<E>(current);
                 //appending neighbors to nextConfig
                 nextConfig.add(iterator);
                 if(iterator == puzzle.getGoal()){
