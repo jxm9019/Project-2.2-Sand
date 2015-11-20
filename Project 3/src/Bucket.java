@@ -15,7 +15,7 @@ public class Bucket{
     //Constructor will take the max amount of sand it can take and build a bucket
     public Bucket(int maxSand){
         this.maxSand = maxSand;
-        this.curSand = 0;
+        curSand = 0;
     }
 
     //Bucket copy constructor

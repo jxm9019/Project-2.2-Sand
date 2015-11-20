@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * This is the Mobius class. Implements Puzzle to solve a Mobius puzzle.
  */
 
+@SuppressWarnings("rawtypes")
 public class Mobius <E> implements Puzzle {
 
     //Fields for range, start and goal of puzzle
@@ -47,7 +48,7 @@ public class Mobius <E> implements Puzzle {
      *  Finds neighbors of given config
 //        @param int: number you want to find neighbors of
         @return ArrayList<Integer>: a list of neighbors
-      */
+      */ 
     @Override
     public ArrayList<Integer> getNeighbors(Object config) {
         //List to hold neighbors
