@@ -25,8 +25,8 @@ public class Mobius <E> implements Puzzle {
     
     //Getter of goal
     @Override
-    public E getGoal() {
-        return goal;
+    public boolean isGoal(E config) {
+        return(this.goal==config);
     }
     
     //Getter of start
@@ -69,7 +69,7 @@ public class Mobius <E> implements Puzzle {
         //If
         } else if (config == range){
             rightNeighbor = 1;
-//            leftNeighbor  = (int)(range - 1);
+//            leftNeighbor  = (int)range - 1;
         } else {
             leftNeighbor  = (int) config - 1;
             rightNeighbor = (int) config + 1;

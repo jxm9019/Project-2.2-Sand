@@ -34,9 +34,9 @@ public class Bucket{
         return maxSand;
     }
 
-    public void setMaxSand(int maxSand) {
-        this.maxSand = maxSand;
-    }
+//    public void setMaxSand(int maxSand) {
+//        this.maxSand = maxSand;
+//    }
 
     //Sets current amount of sand
     public void setCurSand(int curSand) {

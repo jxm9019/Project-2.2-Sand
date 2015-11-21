@@ -19,7 +19,9 @@ public class Solver <E>  {
      **********************************************************/
     public ArrayList<E> solver (Puzzle<E> puzzle){
         //Array list of array list of integers
+
         HashSet<E> visitSet = new HashSet<>();
+
         ArrayList<ArrayList<E>> queue = new ArrayList<>();
         ArrayList<E> startConfig = new ArrayList<>();
         //ArrayList to hold current path
@@ -29,10 +31,12 @@ public class Solver <E>  {
         //Enqueue'ing startConfig
         queue.add(startConfig);
         //Adds first config to visited list
+
         visitSet.add(puzzle.getStart());
+
         //checking if starting config is the ending config
         boolean found;
-        if (puzzle.getStart() == puzzle.getGoal()){
+        if (puzzle.isGoal(puzzle.getStart())){
             current = queue.remove(0);
             found = true;
         }else
@@ -48,14 +52,16 @@ public class Solver <E>  {
                     ArrayList<E> nextConfig = new ArrayList<>(current);
                     //appending neighbors to nextConfig
                     nextConfig.add(iterator);
-                    if (iterator == puzzle.getGoal()) {
+                    if (puzzle.isGoal(iterator)) {
                         current = nextConfig;
                         found = true;
                         break;
                     } else {
                         queue.add(nextConfig);
                     }
+
                     visitSet.add(iterator);
+
                 }
             }
         }

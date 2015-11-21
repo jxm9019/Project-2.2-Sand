@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public interface Puzzle <E> {
 
     //Getter for a goal in the puzzle
-    public E getGoal();
+    public boolean isGoal(E config);
     
     //Will return neighbors of a given number
-    public ArrayList<E> getNeighbors(E config);
+    public ArrayList<E> getNeighbors(Object config);
     
     //Getter for start of puzzle
     public E getStart();

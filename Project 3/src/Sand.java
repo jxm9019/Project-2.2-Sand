@@ -1,3 +1,5 @@
+import javafx.beans.value.ObservableValueBase;
+
 import java.util.ArrayList;
 
 
@@ -42,7 +44,6 @@ public class Sand <E> implements Puzzle {
     	}
     	sandList = new ArrayList<>();
     	sandList.add(this);
-        
     }
 
     
@@ -51,11 +52,9 @@ public class Sand <E> implements Puzzle {
      * @param sander
      */
     public Sand (Sand sander){
-    	
-    	
     	this.amountOfBuckets = sander.amountOfBuckets;
     	this.bucketList = new Bucket[this.amountOfBuckets];
-    	this.goal = (E) sander.getGoal();
+    	this.goal = (E) sander.goal;
     	
     	for (int i = 0; i < bucketList.length; i++){
     		this.bucketList[i] = new Bucket(sander.bucketList[i]);
@@ -65,8 +64,6 @@ public class Sand <E> implements Puzzle {
     	
         
     }
-
-
     //Getter of amount of buckets
     public int getAmountOfBuckets(){
     	return amountOfBuckets;
@@ -79,13 +76,13 @@ public class Sand <E> implements Puzzle {
     
     //Getter of goal
     @Override
-    public E getGoal() {
-        return goal;
+    public boolean isGoal(ArrayList<E> config) {
+        return(config.contains(this.goal));
     }
     //Getter of start
     @Override
     public Object getStart() {
-        return bucketList[0];
+        return this;
     }
     /**This program will return neighbors of a specific configuration
      * It will create all possible solutions and store them in an array.
@@ -97,6 +94,7 @@ public class Sand <E> implements Puzzle {
     public ArrayList<Sand> getNeighbors(Object input) {
 
         Sand config = (Sand)input;
+//        Sand config = new Sand(input);
         ArrayList<Sand> successors = new ArrayList<>();
         for (int k = 0; k < amountOfBuckets; k++) {
         	
@@ -128,7 +126,7 @@ public class Sand <E> implements Puzzle {
             }
         }
         return successors;
-//return null;
+
     }
     
 
@@ -155,9 +153,9 @@ public class Sand <E> implements Puzzle {
         solve.solver(sand);
 
 
-//    	for (int i = 0; i < sandNeighbor.size(); i++){
-//    		for(Sand h: sandNeighbor)
-//    		System.out.println(h.getBucket(i).getCurSand());
-//    	}
+    	for (int i = 0; i < sandNeighbor.size(); i++){
+    		for(Sand h: sandNeighbor)
+    		System.out.println(h.getBucket(i).getCurSand());
+    	}
     }
 }
