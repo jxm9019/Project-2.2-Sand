@@ -11,67 +11,58 @@ import java.util.HashSet;
  * This solver class contains method to solve Mobius puzzle.
  */
 
-public class Solver <E>  {
-
-
-    /****************************************************************
-     //Have to use something other than an array list!!!!!!
-     **********************************************************/
-    public ArrayList<E> solver (Puzzle<E> puzzle){
-        //Array list of array list of integers
-
-        HashSet<E> visitSet = new HashSet<>();
-
+public class Solver<E> {
+    /**
+     * Solves a puzzle
+     *
+     * @param puzzle
+     *            - the puzzle to be solved
+     * @return ArrayList holding solution
+     */
+    public ArrayList<E> solver(Puzzle<E> puzzle) {
+        //Hashset for visited configs for pruning
+        HashSet<E> visitList = new HashSet<E>();
         ArrayList<ArrayList<E>> queue = new ArrayList<>();
-        ArrayList<E> startConfig = new ArrayList<>();
+        ArrayList<E> startConfig = new ArrayList<E>();
         //ArrayList to hold current path
-        ArrayList<E> current = new ArrayList<>();
-        //Adding starting number to start config
-        startConfig.add((puzzle.getStart()));
-        //Enqueue'ing startConfig
+        ArrayList<E> current = null;
+        //Adding start number to start config
+        startConfig.add(puzzle.getStart());
+        //Checks if the given puzzle is already solved with it's first config
+        boolean found = puzzle.isGoal(puzzle.getStart());
         queue.add(startConfig);
-        //Adds first config to visited list
-
-        visitSet.add(puzzle.getStart());
-
-        //checking if starting config is the ending config
-        boolean found;
-        if (puzzle.isGoal(puzzle.getStart())){
+        //Add the first config to the visited list
+        visitList.add(puzzle.getStart());
+        while (!queue.isEmpty() && !found) {
+            //deque's element from queue and adds to current path
             current = queue.remove(0);
-            found = true;
-        }else
-            found = false;
-        while(!queue.isEmpty() && !found){
-            //dequeue'ing the front element from the queue and setting to current
-            current = queue.remove(0);
-            //for each neighbor of the last element in current
-            for (E iterator: puzzle.getNeighbors(current.get(current.size()-1))){
-                //if the config hasn't been visited yet
-                if(!visitSet.contains(iterator)) {
-                    //next config a copy of current
-                    ArrayList<E> nextConfig = new ArrayList<>(current);
-                    //appending neighbors to nextConfig
-                    nextConfig.add(iterator);
-                    if (puzzle.isGoal(iterator)) {
+            ArrayList<E> neighbors = puzzle.getNeighbors(current.get(current.size() - 1));
+            for (E neighbor : neighbors) {
+                //if the neighbor hasnt been visited yet
+                if (!visitList.contains(neighbor)) {
+                    //make a new config to modify
+                    ArrayList<E> nextConfig = new ArrayList<E>();
+                    for (E item : current) {
+                        nextConfig.add(item);
+                    }
+                    nextConfig.add(neighbor);
+                    if (puzzle.isGoal(nextConfig.get(nextConfig.size() - 1))) {
                         current = nextConfig;
                         found = true;
                         break;
                     } else {
                         queue.add(nextConfig);
                     }
-
-                    visitSet.add(iterator);
-
+                    visitList.add(neighbor);
                 }
             }
         }
-
-        //Return array list of path if found
-        if(found)
+        //returns Arraylist path if found
+        if (found) {
             return current;
-            //Return null and print out display saying there is no solution
-        else {
-            System.out.println("There is no solution");
+        //otherwise there is no solution
+        } else {
+            System.out.println("There is no solution.");
             return null;
         }
     }

@@ -8,15 +8,15 @@ import java.util.ArrayList;
  * An interface puzzle class that contains stubs for a puzzle.
  */
 
-public interface Puzzle <E> {
+public interface Puzzle<E> {
 
-    //Getter for a goal in the puzzle
+
+    //Getter for goal in Puzzle
     public boolean isGoal(E config);
-    
-    //Will return neighbors of a given number
-    public ArrayList<E> getNeighbors(Object config);
-    
-    //Getter for start of puzzle
+
+    //Will return neighbors in a puzzle
+    public ArrayList<E> getNeighbors(E config);
+
+    //Getter for starting configuration
     public E getStart();
-    
 }
